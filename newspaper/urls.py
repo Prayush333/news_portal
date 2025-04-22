@@ -11,5 +11,6 @@ urlpatterns = [
     path("contact/",views.ContactView.as_view(),name="contact"),
     path("category-list/", views.CategoryListView.as_view(), name="category-list"),
     path("post-detail/<int:pk>/",views.PostDetailView.as_view(),name="post-detail"),
-     path("tag-detail/<int:pk>/",views.TagDetailView.as_view(),name="tag-detail"),
+    path("tag-detail/<int:pk>/",views.TagDetailView.as_view(),name="tag-detail"),
+    path("comment/",views.CommentView.as_view(),name="comment"),
 ]

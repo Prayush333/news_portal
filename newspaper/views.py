@@ -1,9 +1,9 @@
 from datetime import timedelta
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.shortcuts import render
-from django.views.generic import ListView,CreateView,DetailView
-from newspaper.forms import ContactForm
+from django.shortcuts import redirect, render
+from django.views.generic import ListView,CreateView,DetailView, View
+from newspaper.forms import CommentForm, ContactForm
 from newspaper.models import Category, Contact, Post, Advertisement, Tag
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -113,6 +113,26 @@ class TagDetailView(SidebarMixin, DetailView):
     model = Tag
     template_name = "newsportal/tag_detail.html" 
     context_object_name = "tag"
+
+class CommentView(View):
+    def post(self, request, *args, **kwargs):
+        post_id = request.POST["post"]
+        user_id = request.user.id
+
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.save()
+            return redirect("post-detail",post_id)
+        
+        else:
+            post = Post.objects.get(pk=post_id)
+            return render(
+                request,
+                "newsportal/detail/detail.html",
+                {"post":post, "form":form},
+            )
 
 
    

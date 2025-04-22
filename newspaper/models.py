@@ -72,3 +72,13 @@ class UserProfile(TimeStampModel):
     adderss = models.CharField(max_length=200)
     biography = models.TextField()
 
+class Comment(TimeStampModel):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    content = models.TextField()
+
+    def __str__(self):
+        return f"{self.content[:50]}| {self.user.username}"
+    
+    
+
