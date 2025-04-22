@@ -127,3 +127,7 @@ MEDIA_ROOT = "media"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redirect URL after successful login
+LOGIN_REDIRECT_URL = '/' # Redirect to the home page
+LOGOUT_REDIRECT_URL = '/' # Optional: Redirect to home page after logout (already handled in view, but good practice)

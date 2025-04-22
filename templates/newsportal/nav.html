@@ -1,4 +1,4 @@
-<!-- Elegant Navbar -->
+ <!-- Elegant Navbar -->
 <nav class="navbar navbar-expand-lg sticky-top elegant-navbar">
   <div class="container">
     <a class="navbar-brand fw-bold" href="/">NewsPortal</a>
@@ -70,6 +70,28 @@
           <i class="bi bi-moon-stars-fill"></i>
         </label>
       </div>
+
+      <!-- Login/Logout/Register Links -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="nav-link">Hello, {{ user.username }}!</span>
+          </li>
+          <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="nav-link btn btn-link" style="display: inline; padding: 0; border: none; background: none;">Logout</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+        {% endif %}
+      </ul>
     </div>
   </div>
 </nav>
