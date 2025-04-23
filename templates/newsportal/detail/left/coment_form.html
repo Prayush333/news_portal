@@ -1,4 +1,5 @@
 {% if request.user.is_authenticated %}
+
 <form action="{% url 'comment' %}" method="post">
   {% csrf_token %}
     <div class="mb-3">

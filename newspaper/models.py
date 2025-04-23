@@ -80,5 +80,9 @@ class Comment(TimeStampModel):
     def __str__(self):
         return f"{self.content[:50]}| {self.user.username}"
     
-    
+class Newsletter(TimeoutError):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email
 

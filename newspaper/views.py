@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.shortcuts import redirect, render
 from django.views.generic import ListView,CreateView,DetailView, View
 from newspaper.forms import CommentForm, ContactForm
-from newspaper.models import Category, Contact, Post, Advertisement, Tag
+from newspaper.models import Category, Contact, Post, Advertisement, Tag , Newsletter
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -128,11 +128,21 @@ class CommentView(View):
         
         else:
             post = Post.objects.get(pk=post_id)
+            popular_posts =Post.objects.filter(published_at__isnull=False,status="active").order_by("-published_at")[:5]
+
+            advertisement =Advertisement.objects.all().order_by("-created_at").first()
             return render(
                 request,
                 "newsportal/detail/detail.html",
-                {"post":post, "form":form},
+                {
+                    "post":post,
+                  "form":form,
+                  "popular_posts":popular_posts,
+                  "advertisement":advertisement,
+                  },
             )
+        
+
 
 
    
