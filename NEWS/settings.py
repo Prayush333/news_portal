@@ -31,14 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # build_in apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third party app
+    'rest_framework',
+    # local app
     'newspaper',
     'accounts',
+    'api',
+
 ]
 
 MIDDLEWARE = [
@@ -131,3 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redirect URL after successful login
 LOGIN_REDIRECT_URL = '/' # Redirect to the home page
 LOGOUT_REDIRECT_URL = '/' # Optional: Redirect to home page after logout (already handled in view, but good practice)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

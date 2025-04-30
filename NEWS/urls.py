@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/v1/",include("api.urls")),
     path("", include("newspaper.urls")),
     path("accounts/", include("accounts.urls")), # Include accounts app URLs
 ]
